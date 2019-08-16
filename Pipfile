@@ -10,6 +10,8 @@ flask = "*"
 flask-jwt = "*"
 flask-restful = "*"
 flask-sqlalchemy = "*"
+sqlalchemy = "==1.3.7"
+pyjwt = "*"
 uwsgi = "*"
 
 [requires]
