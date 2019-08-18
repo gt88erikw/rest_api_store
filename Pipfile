@@ -11,6 +11,7 @@ flask-jwt = "*"
 flask-restful = "*"
 flask-sqlalchemy = "*"
 uwsgi = "*"
+psycopg2 = "*"
 
 [requires]
 python_version = "3.7"
