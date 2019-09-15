@@ -5,7 +5,7 @@ UserJSON = Dict[str, Union[int, str]]
 
 
 class UserModel(db.Model):
-    __tablename__ = 'users'
+    __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80))
@@ -16,7 +16,7 @@ class UserModel(db.Model):
         self.password = password
 
     def json(self) -> UserJSON:
-        return {'id': self.id, 'username': self.username}
+        return {"id": self.id, "username": self.username}
 
     @classmethod
     def find_by_username(cls, username: str) -> "UserModel":
@@ -33,4 +33,3 @@ class UserModel(db.Model):
     def delete_from_db(self) -> None:
         db.session.delete(self)
         db.session.commit()
-

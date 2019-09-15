@@ -12,6 +12,7 @@ flask-sqlalchemy = "*"
 uwsgi = "*"
 psycopg2 = "*"
 flask-jwt-extended = "*"
+black = "*"
 
 [requires]
 python_version = "3.7"
