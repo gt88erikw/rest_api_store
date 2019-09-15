@@ -1,23 +1,28 @@
 from flask_restful import Resource
 from models.store import StoreModel
 
+NAME_ALREADY_EXISTS = "A store with name '{}' already exists."
+ERROR_INSERTING = "An error occurred while inserting the store."
+STORE_NOT_FOUND = "Store not found."
+STORE_DELETED = "Store deleted."
+
 
 class Store(Resource):
     def get(self, name: str):
         store = StoreModel.find_by_name(name)
         if store:
             return store.json()  # default 200 is returned here when we don't specify it
-        return {"message": "Store not found"}, 404
+        return {"message": STORE_NOT_FOUND}, 404
 
     def post(self, name: str):
         if StoreModel.find_by_name(name):
-            return {"message": f"A store named {name} already exists."}, 400
+            return {"message": NAME_ALREADY_EXISTS.format(name)}, 400
 
         store = StoreModel(name)
         try:
             store.save_to_db()
         except:
-            return {"message": "An error occurred while creating the store."}, 500
+            return {"message": ERROR_INSERTING}, 500
 
         return store.json(), 201
 
@@ -26,7 +31,7 @@ class Store(Resource):
         if store:
             store.delete_from_db()
 
-        return {"message": "Store deleted"}
+        return {"message": STORE_DELETED}
 
 
 class StoreList(Resource):
